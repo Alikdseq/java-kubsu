@@ -1,3 +1,5 @@
+package task_1;
+
 public class DivideSmallerByTwo {
     public static void main(String[] args) {
         if (args.length == 2) {
