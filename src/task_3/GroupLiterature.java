@@ -1,46 +1,53 @@
 package task_3;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class GroupLiterature {
     private int groupId;        // Уникальный номер группы
-    private Book[] books;       // Массив объектов Book
+    private List<Book> books;   // Список объектов Book
 
     // Конструктор по умолчанию
     public GroupLiterature() {
         this.groupId = 0;
-        this.books = new Book[0];
+        this.books = new ArrayList<>();
     }
 
     // Конструктор с параметрами
-    public GroupLiterature(int groupId, Book[] books) {
+    public GroupLiterature(int groupId, List<Book> books) {
         this.groupId = groupId;
-        this.books = books;
+        this.books = new ArrayList<>(books); // Создаем копию списка
     }
 
     // Геттеры и сеттеры
-    public int getGroupId() { return groupId; }
-    public void setGroupId(int groupId) { this.groupId = groupId; }
+    public int getGroupId() {
+        return groupId;
+    }
 
-    public Book[] getBooks() { return books; }
-    public void setBooks(Book[] books) { this.books = books; }
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
 
-    // Добавление объекта в массив
+    // Возвращаем неизменяемый список книг
+    public List<Book> getBooks() {
+        return Collections.unmodifiableList(books);
+    }
+
+    // Добавление книги
     public void addBook(Book book) {
-        this.books = Arrays.copyOf(this.books, this.books.length + 1);
-        this.books[this.books.length - 1] = book;
+        this.books.add(book);
     }
 
-    // Удаление объекта по коду источника литературы
+    // Удаление книги по коду источника литературы
     public void removeBookBySourceCode(String sourceCode) {
-        this.books = Arrays.stream(this.books)
-                .filter(book -> !book.getSourceCode().equals(sourceCode))
-                .toArray(Book[]::new);
+        books.removeIf(book -> book.getSourceCode().equals(sourceCode));
     }
 
-    // Сортировка массива по году издания
+    // Сортировка книг по году издания
     public void sortBooksByYear() {
-        Arrays.sort(this.books, (b1, b2) -> Integer.compare(b1.getYear(), b2.getYear()));
+        books.sort(Comparator.comparingInt(Book::getYear));
     }
 
     // Переопределение метода toString
@@ -62,7 +69,7 @@ public class GroupLiterature {
         Book b3 = new Book("Мастер и Маргарита", "Михаил Булгаков", 1967, "Фэнтези", 470, "АСТ", "R003");
 
         // Создание группы литературы
-        GroupLiterature group = new GroupLiterature(10, new Book[]{b1, b2, b3});
+        GroupLiterature group = new GroupLiterature(10, List.of(b1, b2, b3));
 
         // Тестирование функционала
         System.out.println("Исходная группа:");
@@ -84,4 +91,3 @@ public class GroupLiterature {
         System.out.println(group);
     }
 }
-
