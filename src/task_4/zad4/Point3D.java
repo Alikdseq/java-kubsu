@@ -1,4 +1,4 @@
-packege task4
+package task_4.zad4;
 
 public class Point3D extends Point {
     private double z;
