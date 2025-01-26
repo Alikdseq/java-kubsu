@@ -1,10 +1,9 @@
-package task_4.zad1;
-
-class Animal {
+// Абстрактный класс Animal
+abstract class Animal {
     private String name;
     private int age;
 
-    // Конструктор
+  
     public Animal(String name, int age) {
         this.name = name;
         this.age = age;
@@ -27,18 +26,15 @@ class Animal {
         this.age = age;
     }
 
-    // Метод makeSound(), который будет переопределен
-    public void makeSound() {
-        System.out.println("Animal makes a sound");
-    }
 
-    // Метод для вывода информации
+    public abstract void makeSound();
+
     public void displayInfo() {
         System.out.println("Name: " + name + ", Age: " + age);
     }
 }
 
-// Подкласс Dog
+
 class Dog extends Animal {
     public Dog(String name, int age) {
         super(name, age);
@@ -50,7 +46,7 @@ class Dog extends Animal {
     }
 }
 
-// Подкласс Cat
+
 class Cat extends Animal {
     public Cat(String name, int age) {
         super(name, age);
@@ -62,7 +58,7 @@ class Cat extends Animal {
     }
 }
 
-// Подкласс Bird
+
 class Bird extends Animal {
     public Bird(String name, int age) {
         super(name, age);
@@ -74,7 +70,7 @@ class Bird extends Animal {
     }
 }
 
-// Класс Zoo для хранения массива животных
+
 class Zoo {
     private Animal[] animals;
     private int count; // Счетчик добавленных животных
@@ -85,7 +81,7 @@ class Zoo {
         count = 0;
     }
 
-    // Метод для добавления животного
+
     public void addAnimal(Animal animal) {
         if (count < animals.length) {
             animals[count] = animal;
@@ -95,12 +91,9 @@ class Zoo {
         }
     }
 
-    // Метод для вызова makeSound() у всех животных
     public void makeAllSounds() {
         for (int i = 0; i < count; i++) {
             animals[i].makeSound();
         }
     }
 }
-
-
