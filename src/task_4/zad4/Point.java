@@ -1,18 +1,16 @@
 package task_4.zad4;
 
-class Point{
+public class Point {
     private double x;
     private double y;
 
-    public Point(double x1, double y1) {
-        this.x = x1;
-        this.y = y1;
+    // Конструктор
+    public Point(double x, double y) {
+        this.x = x;
+        this.y = y;
     }
 
-    public double distance(Point p2){
-        return Math.sqrt((p2.x - this.x) * (p2.x - this.x) + (p2.y - this.y) * (p2.y - this.y));
-    }
-
+    // Геттеры
     public double getX() {
         return x;
     }
@@ -21,11 +19,18 @@ class Point{
         return y;
     }
 
+    // Метод для вычисления расстояния от точки до прямой, заданной уравнением Ax + By + C = 0
+    public double distanceToLine(double A, double B, double C) {
+        // Формула расстояния от точки (x0, y0) до прямой Ax + By + C = 0:
+        // |A*x0 + B*y0 + C| / sqrt(A^2 + B^2)
+        double numerator = Math.abs(A * x + B * y + C);
+        double denominator = Math.sqrt(A * A + B * B);
+        return numerator / denominator;
+    }
+
+    // Переопределение метода toString для удобного вывода
     @Override
     public String toString() {
-        return "Point{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+        return "Point(" + x + ", " + y + ")";
     }
 }
